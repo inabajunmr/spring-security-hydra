@@ -1,0 +1,16 @@
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Hello Security</title>
+</head>
+<body>
+<div>
+    <h1>Hello <span sec:authentication="principal.username"></span>. Do you approve following scopes to <span th:text="${clientId}"></span>?</h1>
+    <tr th:each="scope : ${requestedScope}">
+        <td th:text="${scope}"></td>
+    </tr>
+    <form th:action="@{/consent}" method="post">
+        <input type="submit" value="Consent"/>
+    </form>
+</div>
+</body>
+</html>
