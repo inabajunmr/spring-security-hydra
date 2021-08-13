@@ -22,13 +22,14 @@ Build Time: 2021-07-14T14:42:23Z
 
 ```
 docker run -p 5432:5432 --name hydra-postgres -e POSTGRES_PASSWORD=pass -d postgres
-psql -h localhost -p 5432 -U postgres
+psql -h localhost -p 5432 -U postgres #pass
 create database hydra;
+quit
 ```
 
 ```
 # Migration
-export DSN=postgres://postgres:pass@host.docker.internal:5432/hydra?sslmode=disable
+export DSN=postgres://postgres:pass@localhost:5432/hydra?sslmode=disable
 hydra migrate sql --yes $DSN
 ```
 
@@ -39,6 +40,7 @@ docker network create hydra-for-spring
 docker pull oryd/hydra:v1.10.5-pre.1
 
 # Run Hydra
+export DSN=postgres://postgres:pass@host.docker.internal:5432/hydra?sslmode=disable
 docker run -d \
   --name hydra-for-spring \
   --network hydra-for-spring \
@@ -54,6 +56,12 @@ docker logs hydra-for-spring
 
 # Create client
 hydra clients create --id hydra-for-spring --secret secret --scope api --callbacks https://example.com/callback --endpoint=http://localhost:9001
+```
+
+### Run Spring Application
+
+```
+./gradlew bootRun
 ```
 
 ## Authorization Code Grant

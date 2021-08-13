@@ -20,7 +20,7 @@ class ConsentController(private val restTemplate: RestTemplate, private val sess
         val builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9001/oauth2/auth/requests/consent")
                 .queryParam("consent_challenge", challenge)
         var res = restTemplate.getForEntity(builder.toUriString(), HydraConsentRequestInformationResponse::class.java)
-        logger.info("Hydra response: ${res.body.toString()}")
+        logger.info("Hydra response: ${res.body}")
 
         model.addAttribute("requestedScope", res.body?.requestedScope)
         model.addAttribute("clientId", res.body?.client?.clientId)
