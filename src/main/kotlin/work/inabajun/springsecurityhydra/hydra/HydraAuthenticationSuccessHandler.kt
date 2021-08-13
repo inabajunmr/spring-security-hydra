@@ -20,7 +20,7 @@ class HydraAuthenticationSuccessHandler(private val restTemplate: RestTemplate) 
     override fun onAuthenticationSuccess(request: HttpServletRequest, response: HttpServletResponse, authentication: Authentication) {
 
         val savedRequest = this.requestCache.getRequest(request, response)
-        logger.info("savedRequest:${savedRequest.toString()}")
+        logger.info("savedRequest:${savedRequest}")
 
         if (savedRequest != null) {
             if (savedRequest.parameterMap["login_challenge"] != null) {
