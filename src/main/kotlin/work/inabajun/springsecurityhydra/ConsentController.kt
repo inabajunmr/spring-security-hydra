@@ -17,7 +17,7 @@ class ConsentController(private val restTemplate:RestTemplate,private val sessio
     @GetMapping("consent")
     fun consentForm(@RequestParam("consent_challenge") challenge: String, model:Model) :String {
         // https://www.ory.sh/hydra/docs/reference/api#operation/getConsentRequest
-        val builder = UriComponentsBuilder.fromHttpUrl("http://localhost:4445/oauth2/auth/requests/consent")
+        val builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9001/oauth2/auth/requests/consent")
                 .queryParam("consent_challenge", challenge)
         var res = restTemplate.getForEntity(builder.toUriString(), HydraConsentRequestInformationResponse::class.java)
         logger.info("Hydra response: ${res.body.toString()}")
@@ -38,7 +38,7 @@ class ConsentController(private val restTemplate:RestTemplate,private val sessio
         var requestedScope = session.getAttribute("requested_scope")
         session.removeAttribute("requested_scope")
 
-        val builder = UriComponentsBuilder.fromHttpUrl("http://localhost:4445/oauth2/auth/requests/consent/accept")
+        val builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9001/oauth2/auth/requests/consent/accept")
                 .queryParam("consent_challenge", challenge)
         val reqBody = HydraAcceptConsentRequest()
         reqBody.grantScope = requestedScope as List<String>?

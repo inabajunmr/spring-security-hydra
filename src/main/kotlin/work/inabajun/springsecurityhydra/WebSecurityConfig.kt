@@ -47,7 +47,7 @@ class WebSecurityConfig(private val restTemplate : RestTemplate) : WebSecurityCo
 
         http.authorizeRequests { requests ->
             requests
-                    .antMatchers("/api/**").hasAnyAuthority("SCOPE_openid") // TODO
+                    .antMatchers("/api/**").hasAnyAuthority("SCOPE_api")
         }.oauth2ResourceServer { oauth2 -> oauth2.opaqueToken() }
     }
 
