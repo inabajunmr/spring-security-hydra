@@ -22,7 +22,7 @@ Build Time: 2021-07-14T14:42:23Z
 
 ```
 docker run -p 5432:5432 --name hydra-postgres -e POSTGRES_PASSWORD=pass -d postgres
-psql -h localhost -p 5432 -U postgres #pass
+psql -h localhost -p 5432 -U postgres
 create database hydra;
 quit
 ```
