@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder
 /**
  * AuthenticationSuccessHandler for redirect to Hydra
  */
-class HydraAuthenticationSuccessHandler(private val restTemplate :RestTemplate): SavedRequestAwareAuthenticationSuccessHandler() {
+class HydraAuthenticationSuccessHandler(private val restTemplate: RestTemplate) : SavedRequestAwareAuthenticationSuccessHandler() {
 
     private val requestCache: RequestCache = HttpSessionRequestCache()
 
@@ -23,13 +23,13 @@ class HydraAuthenticationSuccessHandler(private val restTemplate :RestTemplate):
         logger.info("savedRequest:${savedRequest.toString()}")
 
         if (savedRequest != null) {
-            if(savedRequest.parameterMap["login_challenge"] != null) {
+            if (savedRequest.parameterMap["login_challenge"] != null) {
                 val builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9001/oauth2/auth/requests/login/accept")
                         .queryParam("login_challenge", savedRequest.parameterMap["login_challenge"]!![0])
                 val req = RequestEntity.put(builder.toUriString())
                         .body(HydraAcceptLoginRequest(authentication.name))
                 logger.info(req.toString())
-                var res = restTemplate.exchange(req, HydraAcceptLoginResponse::class.java) // TODO ベーシック認証
+                var res = restTemplate.exchange(req, HydraAcceptLoginResponse::class.java)
                 logger.info("Hydra response: ${res.body.toString()}")
                 this.requestCache.removeRequest(request, response)
 
@@ -41,5 +41,4 @@ class HydraAuthenticationSuccessHandler(private val restTemplate :RestTemplate):
 
         super.onAuthenticationSuccess(request, response, authentication)
     }
-
 }

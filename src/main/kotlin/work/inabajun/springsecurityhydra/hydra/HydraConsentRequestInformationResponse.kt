@@ -2,10 +2,10 @@ package work.inabajun.springsecurityhydra.hydra
 
 import java.util.*
 
-class HydraConsentRequestInformationResponse (var challenge:String) {
+class HydraConsentRequestInformationResponse(var challenge: String) {
 
     // for jackson
-    constructor():this("INVALID")
+    constructor() : this("INVALID")
 
     var acr: String? = null
     var client: Client? = null

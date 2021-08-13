@@ -9,14 +9,14 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate
 
 @Configuration
-class RestTemplateConfiguration (){
+class RestTemplateConfiguration() {
 
     @Bean
-    fun restTemplate() : RestTemplate{
+    fun restTemplate(): RestTemplate {
         var mapper = ObjectMapper()
         mapper.propertyNamingStrategy = PropertyNamingStrategies.SNAKE_CASE
         return RestTemplateBuilder()
                 .messageConverters(MappingJackson2HttpMessageConverter(mapper)).build()
     }
 
- }
+}

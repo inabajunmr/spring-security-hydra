@@ -10,12 +10,12 @@ import work.inabajun.springsecurityhydra.hydra.*
 import javax.servlet.http.HttpSession
 
 @Controller
-class ConsentController(private val restTemplate:RestTemplate,private val session:HttpSession) {
+class ConsentController(private val restTemplate: RestTemplate, private val session: HttpSession) {
 
     private val logger = org.apache.commons.logging.LogFactory.getLog(this.javaClass)
 
     @GetMapping("consent")
-    fun consentForm(@RequestParam("consent_challenge") challenge: String, model:Model) :String {
+    fun consentForm(@RequestParam("consent_challenge") challenge: String, model: Model): String {
         // https://www.ory.sh/hydra/docs/reference/api#operation/getConsentRequest
         val builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9001/oauth2/auth/requests/consent")
                 .queryParam("consent_challenge", challenge)
@@ -31,7 +31,7 @@ class ConsentController(private val restTemplate:RestTemplate,private val sessio
     }
 
     @PostMapping("consent")
-    fun consent() :String{
+    fun consent(): String {
 
         var challenge = session.getAttribute("consent_challenge")
         session.removeAttribute("consent_challenge")

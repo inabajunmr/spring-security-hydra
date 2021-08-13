@@ -18,7 +18,7 @@ import work.inabajun.springsecurityhydra.hydra.HydraAuthenticationSuccessHandler
 
 @EnableWebSecurity
 @Configuration
-class WebSecurityConfig(private val restTemplate : RestTemplate) : WebSecurityConfigurerAdapter() {
+class WebSecurityConfig(private val restTemplate: RestTemplate) : WebSecurityConfigurerAdapter() {
 
     @Value("\${security.oauth2.resourceserver.opaque-token.introspection-uri}")
     var introspectionUri: String? = null

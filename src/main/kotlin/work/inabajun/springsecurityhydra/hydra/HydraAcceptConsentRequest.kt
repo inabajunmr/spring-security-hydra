@@ -10,6 +10,7 @@ class HydraAcceptConsentRequest() {
     var rememberFor = 0
     var session: Session? = null
 }
+
 class AccessToken
 
 class IdToken

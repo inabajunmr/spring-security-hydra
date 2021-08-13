@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SpringSecurityHydraApplication
 
 fun main(args: Array<String>) {
-	runApplication<SpringSecurityHydraApplication>(*args)
+    runApplication<SpringSecurityHydraApplication>(*args)
 }

@@ -9,11 +9,10 @@ import javax.servlet.http.HttpSession
 import org.springframework.beans.factory.annotation.Autowired
 
 @Controller
-class LoginController (){
+class LoginController() {
 
     @GetMapping("/login")
     fun login(): String {
         return "login"
     }
-
 }
